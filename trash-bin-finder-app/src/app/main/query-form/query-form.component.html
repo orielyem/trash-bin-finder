@@ -1,0 +1,19 @@
+<form [formGroup]="checkoutForm" *ngIf="formSettings">
+  <div *ngFor="let item of formSettings.params">
+    <input
+      [id]="item.name"
+      [type]="item.type"
+      [formControlName]="item.alias"
+      [placeholder]="item.name"
+    />
+  </div>
+  <button
+    class="button"
+    id="queryFormButton"
+    (click)="
+      OnClick(checkoutForm.value, formSettings.requestProp, formSettings.method)
+    "
+  >
+    Submit
+  </button>
+</form>

@@ -1,0 +1,11 @@
+.result {
+  background-color: lightgray;
+  margin-bottom: 10px;
+}
+
+span {
+  margin-right: 15px !important;
+}
+p{
+  line-height:2px;
+}

@@ -1,0 +1,24 @@
+<mat-sidenav #sidenav class="sidenav" mode="side" opened="true">
+  <mat-nav-list *ngFor="let item of navbarSettings">
+    <mat-list-item (click)="controlSerachMenu(item.title)" class="parent">
+      <span class="full-width">{{ item.title }}</span>
+      <mat-icon mat-list-icon>{{ item.icon }}</mat-icon>
+      <mat-icon
+        class="menu-button"
+        [ngClass]="{ rotated: isDisplayedArray[item.title].showSubmenu }"
+      >
+        expand_more</mat-icon
+      >
+    </mat-list-item>
+    <div
+      class="submenu"
+      [ngStyle]="{ display: isDisplayedArray[item.title].display }"
+      [ngClass]="{ expanded: isDisplayedArray[item.title].showSubmenu }"
+      *ngFor="let member of item.members"
+    >
+      <mat-list-item (click)="selectQuery(member, item.method)">{{
+        member
+      }}</mat-list-item>
+    </div>
+  </mat-nav-list>
+</mat-sidenav>

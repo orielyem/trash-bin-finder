@@ -1,0 +1,8 @@
+<mat-card class="result" *ngFor="let result of results">
+  <mat-card-title>Trash bin:</mat-card-title>
+  <mat-card-content>
+    <p *ngFor="let item of result">
+      <span>{{ item.name | seperateConcatWords }} : {{ item.value }}</span>
+    </p>
+  </mat-card-content>
+</mat-card>

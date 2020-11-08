@@ -1,0 +1,21 @@
+<div class="item">
+  <app-sidenav (function)="transferData($event)"></app-sidenav>
+</div>
+<div class="item">
+  <app-query-form
+    (function)="exacuteRequest($event)"
+    [formSettings]="formSettings"
+  ></app-query-form>
+</div>
+<div class="item" id="results">
+  <app-result [results]="results"></app-result>
+</div>
+<div class="lastItem">
+  <app-map [markers]="markers"></app-map>
+</div>
+<ngb-alert
+  class="notification"
+  *ngIf="alertMessage.message"
+  [type]="alertMessage.type"
+  >{{ alertMessage.message }}
+</ngb-alert>

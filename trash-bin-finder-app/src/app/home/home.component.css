@@ -1,0 +1,29 @@
+
+.home {
+  background-image: url("../../assets/PH051-1.jpg");
+  height: 100%;
+  /* Center the background image */
+  background-position: center;
+  /* Scale and zoom in the image */
+  background-size: cover;
+  position: relative;
+  color: white;
+  /* Add a font */
+  
+  /* Set the font-size to 25 pixels */
+
+
+}
+
+/* Position text in the middle */
+#middle {
+    font-family: "Courier New", Courier, monospace !important;
+    display: inline-block;
+    position: absolute;
+    top: 11%;
+    left: 50%;
+    font-size: 30px;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
