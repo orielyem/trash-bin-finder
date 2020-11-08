@@ -35,7 +35,7 @@ swagger accsessable at
 ```bash
 http://localhost:3000/swagger
 ```
-## Running on  Docker
+## Running on Docker
 
 simply open cmd/powershell in each service repository and run dockerDeploymentScript.sh with the desierd version.
 example:
@@ -44,6 +44,21 @@ example:
 C:\Users\username\Documents\Trash-bin-Finder\trash-bin-finder-service>.\dockerDeploymentScript.sh 1.0
 ```
 
+## Running the app
+
+open the project in vs code and run:
+
+```bash
+npm install
+```
+
+after installation run 
+```bash
+ng serve
+```
+
+after compile app will be available on oprt 4200
+
 ## Notes
 
 * Tests are located in trash-bin-finder-service
@@ -51,3 +66,4 @@ C:\Users\username\Documents\Trash-bin-Finder\trash-bin-finder-service>.\dockerDe
 (if you have redis allready installed that expose another port just change the configuration)
 * Make sure that you run postgres locally and expose port 5342 
 * You can find DI implemention in postgres-dal & trash-bin-finder-service
+* To run the app smoothly make sure all the services are up to date and runing
