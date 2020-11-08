@@ -17,6 +17,7 @@ const bodyParser = require('body-parser');
 const csvClient = require('fast-csv');
 const awilix = require('awilix');
 const config = require('config');
+const cors = require('cors');
 
 const isAliveRouter = require('./routes/is-alive-route');
 const trashBinRouter = require('./routes/trash-bin-route');
@@ -48,7 +49,7 @@ container.register({
     axios: awilix.asValue(axios),
     axiosConfig: awilix.asValue(config.clientSettings.baseSettings),
 
-
+    cors: awilix.asValue(cors),
     config: awilix.asValue(config),
     urlEnding: awilix.asValue(config.clientSettings.urlEnding),
     bodyParser: awilix.asValue(bodyParser),

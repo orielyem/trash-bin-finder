@@ -11,9 +11,9 @@ module.exports = {
         queries:{
             GET :{
                 '/emptyingDateById':'Select "emptyingDate" FROM  exercise.trashbin WHERE id = $1',
-                '/byEmptyingDateRange':'Select id,color,type,,(st_x("geoLocation"::geometry),st_y("geoLocation"::geometry)) as "geoLocation" , "emptyingDate"  FROM  exercise.trashbin WHERE "emptyingDate" BETWEEN $1 AND $2' ,
+                '/byEmptyingDateRange':'Select id,color,type,(st_x("geoLocation"::geometry),st_y("geoLocation"::geometry)) as "geoLocation" , "emptyingDate"  FROM  exercise.trashbin WHERE "emptyingDate" BETWEEN $1 AND $2' ,
                 '/byEmptyingDate':'Select id,color,type,(st_x("geoLocation"::geometry),st_y("geoLocation"::geometry)) as "geoLocation" , "emptyingDate"  FROM  exercise.trashbin WHERE "emptyingDate" = $1' ,
-                '/byDistanceFromPoint':'SELECT id,color,type,,(st_x("geoLocation"::geometry),st_y("geoLocation"::geometry)) as "geoLocation" , "emptyingDate" FROM exercise.trashbin  WHERE ST_DWithin("geoLocation",ST_GeogFromText($1),$2, false);' 
+                '/byDistanceFromPoint':'SELECT id,color,type,(st_x("geoLocation"::geometry),st_y("geoLocation"::geometry)) as "geoLocation" , "emptyingDate" FROM exercise.trashbin  WHERE ST_DWithin("geoLocation",ST_GeogFromText($1),$2, false);' 
             },
             PUT :{
                 '/emptyingDateById':'UPDATE exercise.trashbin SET "emptyingDate" = $1 WHERE id = $2',

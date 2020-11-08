@@ -27,7 +27,11 @@ module.exports = (router, trashBinApi) => {
             console.log(`action: get by id request. params:${JSON.stringify({ id })}`)
             let result = await trashBinApi.queryExacuter({id},{route:req.route.path,method:req.method});
             console.log(`action: successfully complete get by id request. params:${JSON.stringify({ id })}`)
-            res.send(result);
+            if (result.length > 0) {
+                res.send(result);
+            } else {
+                res.status(404).send()
+            }
         } catch (err) {
             let msg = `action: An error occurred in the proccess of
             -get by id request.`
@@ -82,7 +86,7 @@ module.exports = (router, trashBinApi) => {
             console.log(`action: delete by id request . params:${JSON.stringify({ id })}`)
             await trashBinApi.queryExacuter({ id },{route:req.route.path,method:req.method});
             console.log(`action: successfully complete delete by id . params:${JSON.stringify({ id })}`)
-            res.send()
+            res.status(204).send()
         } catch (err) {
             let msg = `action: An error occurred in the proccess of 
             -delete by id request.`
@@ -99,7 +103,7 @@ module.exports = (router, trashBinApi) => {
             await trashBinApi.queryExacuter(body,{route:req.route.path,method:req.method});
             console.log(`action: successfully complete add new trash bin request.
             params:${JSON.stringify({ body })}`)
-            res.send()
+            res.status(204).send()
         } catch (err) {
             let msg = `action: An error occurred in the proccess of 
             -add new trash bin request.`
@@ -116,7 +120,7 @@ module.exports = (router, trashBinApi) => {
             await trashBinApi.queryExacuter({ geoLocation, id },{route:req.route.path,method:req.method});
             console.log(`action: successfully complete update location by id request.
             params:${JSON.stringify({ geoLocation, id })}`)
-            res.send()
+            res.status(204).status(201).send()
         } catch (err) {
             let msg = `action: An error occurred in the proccess of 
             -update location by id request.`
@@ -133,7 +137,7 @@ module.exports = (router, trashBinApi) => {
             await trashBinApi.queryExacuter({ emptyingDate, id },{route:req.route.path,method:req.method});
             console.log(`action: successfully complete update emptying date by id request 
             . params:${JSON.stringify({ emptyingDate, id })}`)
-            res.send()
+            res.status(204).send()
         } catch (err) {
             let msg = `action: An error occurred in the proccess of 
             -update emptying date by id request.`

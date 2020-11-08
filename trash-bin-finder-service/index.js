@@ -9,6 +9,7 @@ const swaggerDocs = container.resolve('swaggerDocs')
 
 const routes = container.resolve('routes');
 const app = container.resolve('app');
+const cors = container.resolve('cors');
 
 initServer()
 uncaughtErrorHandler()
@@ -18,6 +19,7 @@ app.listen(config.servicePort, () => {
 })
 
 function initServer() {
+    app.use(cors({origin:true}));
     app.use(bodyParser.json());
     app.use('/api', routes);
     app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerDocs))

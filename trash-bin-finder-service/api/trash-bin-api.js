@@ -67,6 +67,29 @@ class TrashBinApi {
             throw err
         }
     }
+
+        //#region getEmptyingDateById summary
+    /**
+     * @swagger
+     * /api/emptyingDateById:
+     *  get:
+     *    description: Get an emptying date by given id 
+     *    parameters:
+     *       - name: id
+     *         description: id og trash bin.
+     *         in: query
+     *         required: true
+     *         type: string
+     *    responses:
+     *      '200':
+     *        description: An emptyingDate
+     *        properties:
+     *          emptyingDate:
+     *            type: string
+     *            format: date
+     *                 
+     */
+    //#endregion
     getEmptyingDateById = async (urlEnding,id) => {
         let result;
         try {
@@ -225,7 +248,7 @@ class TrashBinApi {
     //#endregion
     addTrashBin = async (urlEnding, params) => {
         try {
-            return await this._client.put(urlEnding, params)
+            return await this._client.post(urlEnding, params)
         } catch (err) {
             throw err
         }
@@ -290,7 +313,7 @@ class TrashBinApi {
     //#endregion
     updateTrashBinLocationById = async (urlEnding, params) => {
         try {
-            return await this._client.post(urlEnding, params);
+            return await this._client.put(urlEnding, params);
         } catch (err) {
             throw err
         }
@@ -334,7 +357,7 @@ class TrashBinApi {
                 updated data to redis. params:${JSON.stringify(params)}`)
                 throw err
             }
-            return await this._client.post(urlEnding, params);
+            return await this._client.put(urlEnding, params);
         } catch (err) {
             throw err
         }

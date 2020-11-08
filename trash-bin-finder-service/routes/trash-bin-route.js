@@ -1,13 +1,27 @@
-module.exports = (router, trashBinApi, csvClient, urlEnding) => {
+const { json } = require("body-parser");
+const { addListener } = require("nodemon");
 
+module.exports = (router, trashBinApi, csvClient, urlEnding) => {
+    falttenResults = async (results) => {
+        for (let i = 0; i < results.length; i++) {
+            Object.keys(results[i]).forEach((obj) => {
+                if (typeof results[i][obj] === 'object') {
+                    results[i][obj] = JSON.stringify(results[i][obj])
+                }
+            })
+
+        }
+        return results
+    }
     router.get("/reportByEmptyingDateRange", async (req, res) => {
         try {
             let { gteEmptyingDate, ltEmptyingDate } = req.query;
             console.log(`action: get report by emptyingDate range  request. params:${JSON.stringify({ gteEmptyingDate, ltEmptyingDate })}`)
             let result = await trashBinApi.getReportByRangeEmptyingDate(urlEnding.getReportEmptyingDate, { gteEmptyingDate, ltEmptyingDate });
+            result = await falttenResults(result);
             res.writeHead(200, {
                 'Content-Type': 'text/csv',
-                "Content-Disposition": "attachment;filename=report.csv",
+                'Content-Disposition': "attachment;filename=report.csv",
             });
             csvClient.write(result, { headers: true }).pipe(res)
             console.log(`action: successfully complete get report by emptyingDate range request. params:${JSON.stringify({ gteEmptyingDate, ltEmptyingDate })}`)
@@ -102,7 +116,7 @@ module.exports = (router, trashBinApi, csvClient, urlEnding) => {
             console.log(`action: delete by id request . params:${JSON.stringify({ id })}`)
             await trashBinApi.deleteTrashBinById(urlEnding.deleteById, id);
             console.log(`action: successfully complete delete by id . params:${JSON.stringify({ id })}`)
-            res.send()
+            res.status(204).send()
         } catch (err) {
             let msg = `action: An error occurred in the proccess of 
             -delete by id request.`
@@ -120,7 +134,7 @@ module.exports = (router, trashBinApi, csvClient, urlEnding) => {
             await trashBinApi.addTrashBin(urlEnding.add, body);
             console.log(`action: successfully complete add new trash bin request.
              params:${JSON.stringify({ body })}`)
-            res.send()
+             res.status(201).send()
         } catch (err) {
             let msg = `action: An error occurred in the proccess of 
             -add new trash bin request.`
@@ -137,7 +151,7 @@ module.exports = (router, trashBinApi, csvClient, urlEnding) => {
             await trashBinApi.updateTrashBinLocationById(urlEnding.updateLocation, { geoLocation, id });
             console.log(`action: successfully complete update location by id request.
              params:${JSON.stringify({ geoLocation, id })}`)
-            res.send()
+             res.status(204).send()
         } catch (err) {
             let msg = `action: An error occurred in the proccess of 
             -update location by id request.`
@@ -154,7 +168,7 @@ module.exports = (router, trashBinApi, csvClient, urlEnding) => {
             await trashBinApi.updateTrashBinEmptingDateById(urlEnding.updateEmptyingDate, { emptyingDate, id });
             console.log(`action: successfully complete update emptying date by id request 
             . params:${JSON.stringify({ emptyingDate, id })}`)
-            res.send()
+            res.status(204).send()
         } catch (err) {
             let msg = `action: An error occurred in the proccess of 
             -update emptying date by id request.`
